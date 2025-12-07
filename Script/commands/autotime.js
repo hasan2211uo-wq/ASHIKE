@@ -1,77 +1,155 @@
-const schedule = require('node-schedule');
-const moment = require('moment-timezone');
-const chalk = require('chalk');
+const moment = require("moment-timezone");
 
 module.exports.config = {
-    name: 'autosent',
-    version: '10.0.1',
-    hasPermssion: 0,
-    credits: 'Shahadat Islam',
-    description: 'Automatically sends messages at scheduled times (BD Time)',
-    commandCategory: 'group messenger',
-    usages: '[]',
-    cooldowns: 3
+  name: "autotime",
+  version: "7.0.0",
+  hasPermssion: 2,
+  credits: "Saiful",
+  description: "বট চালু হলেই প্রতি ঘন্টা সময়, বাংলা তারিখ ও দোয়া পাঠাবে",
+  commandCategory: "system",
+  usages: "autotime",
+  cooldowns: 5,
 };
 
-const messages = [
-    { time: '12:00 AM', message: 'এখন সময় রাত 12:00 AM ⏳\nঅনেক রাত হলো, ঘুমিয়ে পড় Bby Good Night 😴💤❤️', special: null },
-    { time: '1:00 AM', message: 'এখন সময় রাত 1:00 AM ⏳\nকিরে তুই এখনো ঘুমাস নাই? তাড়াতাড়ি ঘুমিয়ে পড়!😾😴🛌', special: null },
-    { time: '2:00 AM', message: 'এখন সময় রাত 2:00 AM ⏳\nঘুমে আয় ভাই! এখনো জাইগা আফসোস ক্যান?😤👊💤', special: null },
-    { time: '3:00 AM', message: 'এখন সময় রাত 3:00 AM ⏳\nসবাই ঘুমাইয়া গেছে, তুই এখন জাইগা আসোস ক্যান?🙄🌃🛌', special: null },
-    { time: '4:00 AM', message: 'এখন সময় ভোর 4:00 AM ⏳\nএকটু পর আজান হবে, সময় হয়ে গেছে। 🕌🕋🕓', special: null },
-    { time: '5:00 AM', message: 'এখন সময় ভোর 5:00 AM ⏳\nফজরের আজান হয়ে গেছে, নামাজটা পরে নিও পিও~ 🕌✨🤲💖', special: null },
-    { time: '6:00 AM', message: 'এখন সময় সকাল 6:00 AM ⏳\nআসসালামুয়ালাইকুম Good Morning Bby! এখন বিছানা থেকে উঠে ব্যায়াম টা করে ফেল 🌅💖😳', special: null },
-    { time: '7:00 AM', message: 'এখন সময় সকাল 7:00 AM ⏳\nঘুম ভাঙতেই মোবাইল! দাঁত ব্রাশটা করবি তো নাকি!🛌➡️📱', special: null },
-    { time: '8:00 AM', message: 'এখন সময় সকাল 8:00 AM ⏳\nপিও, মোবাইল রেখে দাঁত ব্রাশ করে খেয়ে নাও!📱🪥🍽️', special: null },
-    { time: '9:00 AM', message: 'এখন সময় সকাল 9:00 AM ⏳\nBby, Breakfast korco?🍳🥞💖', special: null },
-    { time: '10:00 AM', message: 'এখন সময় সকাল 10:00 AM ⏳\nকিরে ভন্ড, তুই আজ কলেজ যাস নাই? 😜📚🙄', special: null },
-    { time: '11:00 AM', message: 'এখন সময় সকাল 11:00 AM ⏳\nনাটক কম কর পিও~ বস এখন বিজি আছে!🙄📱💼', special: null },
-    { time: '12:00 PM', message: 'এখন সময় দুপুর 12:00 PM ⏳\nGood Afternoon! 🌞🙌🌸', special: null },
-    { time: '1:00 PM', message: 'এখন সময় দুপুর 1:00 PM ⏳\nভন্ড কোথাকার মোবাইল বন্ধ করে জোহরের নামাজ পড়ে নাও😻❣️🥰', special: null },
-    { time: '2:00 PM', message: 'এখন সময় দুপুর 2:00 PM ⏳\nভন্ড কোথাকার, মোবাইল রাখ! গোসল করে খাওয়া-দাওয়া করে নে🔪🛁🍽️', special: null },
-    { time: '3:00 PM', message: 'এখন সময় বিকেল 3:00 PM ⏳\nJan, তোমাকে ছাড়া আর দুপুরে ঘুম হয় না….!😴💔🌙', special: null },
-    { time: '4:00 PM', message: 'এখন সময় বিকেল 4:00 PM ⏳\nঅনেক গরম পড়েছিল আজ! 🥵🌞💦', special: null },
-    { time: '5:00 PM', message: 'এখন সময় বিকেল 5:00 PM ⏳\nপরিস্থিতি যেমনি হোক না কেন, সব সময় হলে হাসতেই হবে! 😅🕒🙂', special: null },
-    { time: '6:00 PM', message: 'এখন সময় সন্ধ্যা 6:00 PM ⏳\nGood Evening Everyone! সবাই হাত মুখ ধুয়ে নাও! 🌆👐💦', special: null },
-    { time: '7:00 PM', message: 'এখন সময় সন্ধ্যা 7:00 PM ⏳\nকিরে ভন্ড, তুই আজ পড়তে বসছিলি নাকি?😏📚🤔', special: null },
-    { time: '8:00 PM', message: 'এখন সময় রাত 8:00 PM ⏳\nওই ওই, এতো bot bot না করে আমার বস শাহাদাৎ কে একটা গফ দে...!🫰😎🔥', special: null },
-    { time: '9:00 PM', message: 'এখন সময় রাত 9:00 PM ⏳\nআমার cute bby টাহ খানা খাইছে...!😘🍽️❤️', special: null },
-    { time: '10:00 PM', message: 'এখন সময় রাত 10:00 PM ⏳\nকিরে ভন্ড, খাইবি কখন? সারাদিন মোবাইল টিপস..!😜📱😾', special: null },
-    { time: '11:00 PM', message: 'এখন সময় রাত 11:00 PM ⏳\nযে ছেড়ে গেছে 😔 তাকে ভুলে যাও 🙂 আমার বস শাহাদাৎ এর সাথে প্রেম করে তাকে দেখিয়ে দাও...!🙈🐸🤗', special: null }
+const runningGroups = new Set();
+
+// বাংলা মাস ও সপ্তাহের নাম
+const banglaMonths = [
+  "বৈশাখ", "জ্যৈষ্ঠ", "আষাঢ়", "শ্রাবণ", "ভাদ্র", "আশ্বিন",
+  "কার্তিক", "অগ্রহায়ণ", "পৌষ", "মাঘ", "ফাল্গুন", "চৈত্র"
 ];
 
-module.exports.onLoad = ({ api }) => {
-    console.log(chalk.bold.hex("#00c300")("============ AUTOSENT COMMAND LOADED (BD TIME) ============"));
+const banglaWeekdays = [
+  "রবিবার", "সোমবার", "মঙ্গলবার",
+  "বুধবার", "বৃহস্পতিবার", "শুক্রবার", "শনিবার"
+];
 
-    messages.forEach(({ time, message }) => {
-        const [hour, minute, period] = time.split(/[: ]/);
-        let hour24 = parseInt(hour, 10);
-        if (period === 'PM' && hour !== '12') {
-            hour24 += 12;
-        } else if (period === 'AM' && hour === '12') {
-            hour24 = 0;
-        }
+const banglaDigits = ["০","১","২","৩","৪","৫","৬","৭","৮","৯"];
 
-        const rule = new schedule.RecurrenceRule();
-        rule.tz = 'Asia/Dhaka';
-        rule.hour = hour24;
-        rule.minute = parseInt(minute, 10);
+// ইংরেজি সংখ্যা বাংলায় রূপান্তর
+function toBanglaNumber(num) {
+  return num.toString().replace(/\d/g, d => banglaDigits[d]);
+}
 
-        schedule.scheduleJob(rule, () => {
-            if (!global.data?.allThreadID) return;
-            global.data.allThreadID.forEach(threadID => {
-                api.sendMessage(message, threadID, (error) => {
-                    if (error) {
-                        console.error(`Failed to send message to ${threadID}:`, error);
-                    }
-                });
-            });
-        });
+// বাংলা তারিখ গণনা (সঠিক)
+function getBanglaDate(now) {
+  const gYear = now.year();
+  const gMonth = now.month() + 1; // 1-12
+  const gDay = now.date();
 
-        console.log(chalk.hex("#00FFFF")(`Scheduled (BDT): ${time} => ${message}`));
-    });
+  // Pohela Boishakh: 14 April (14-04) গ্রেগরিয়ান
+  let banglaYear = gYear - 593;
+  let dayOfYear = moment(now).dayOfYear();
+  let pohelaBoishakh = moment(`${gYear}-04-14`, "YYYY-MM-DD").dayOfYear();
+
+  if (dayOfYear < pohelaBoishakh) {
+    banglaYear--;
+    pohelaBoishakh = moment(`${gYear-1}-04-14`, "YYYY-MM-DD").dayOfYear();
+  }
+
+  let dayCount = dayOfYear - pohelaBoishakh + 1;
+  if (dayCount <= 0) dayCount += moment(`${gYear}-12-31`, "YYYY-MM-DD").dayOfYear();
+
+  // মাসের দৈর্ঘ্য বাংলা ক্যালেন্ডার অনুযায়ী
+  const monthLengths = [31,31,31,31,31,30,30,30,30,30,30,30]; // Approximate
+  let monthIndex = 0;
+  while(dayCount > monthLengths[monthIndex]) {
+    dayCount -= monthLengths[monthIndex];
+    monthIndex = (monthIndex + 1) % 12;
+  }
+
+  const weekday = banglaWeekdays[now.day()];
+
+  return {
+    day: toBanglaNumber(dayCount),
+    month: banglaMonths[monthIndex],
+    year: toBanglaNumber(banglaYear),
+    weekday
+  };
+}
+
+function sendTime(api, threadID) {
+  if (!runningGroups.has(threadID)) return;
+
+  const timeZone = "Asia/Dhaka";
+  const now = moment().tz(timeZone);
+  const time = now.format("hh:mm A");
+  const date = now.format("DD/MM/YYYY, dddd");
+  const bangla = getBanglaDate(now);
+
+  const msg = `
+╔═❖═❖═❖═❖═❖═❖═╗
+ ⏰ 𝗧𝗜𝗠𝗘 & 𝗗𝗔𝗧𝗘 ⏰
+╚═❖═❖═❖═❖═❖═❖═╝
+    ╔═✪═🕒═✪═╗
+    সময়: ${time}
+    ╚════════╝
+📅 ইংরেজি তারিখ: ${date}
+🗓️ বাংলা তারিখ: ${bangla.day} ${bangla.month}, ${bangla.year} (${bangla.weekday})
+🌍 টাইমজোন: ${timeZone}
+━━━━━━━━━━━━━━━━━━━━
+✨ আল্লাহর নিকটে বেশি বেশি দোয়া করুন..! 
+🙏 ৫ ওয়াক্ত নামাজ নিয়মিত পড়ুন..!
+🤝 সকলের সাথে সদ্ভাব বজায় রাখুন..!
+━━━━━━━━━━━━━━━━━━━━
+🌸✨🌙🕊️🌼🌿🕌💖🌙🌸✨🌺
+
+    ◥⃧⃜ؖؖ◥⃧⃜ؖؖؖؖ⃝ࣩࣩࣩࣩࣩࣩࣩࣩࣩࣩࣩ✥✾𝄞✥𝐌𝐚𝐢𝐬𝐡𝐚✥𝄞✾◥⃧⃜ؖؖ◥⃧⃜ؖؖؖؖ⃝ࣩࣩࣩࣩࣩࣩࣩࣩࣩࣩࣩ✥
+`;
+
+  api.sendMessage(msg, threadID);
+}
+
+// রানার ফাংশন একই থাকবে
+module.exports.run = async function ({ api, event }) {
+  const threadID = event.threadID;
+
+  if (runningGroups.has(threadID)) {
+    return api.sendMessage("⏰ এই গ্রুপে ইতিমধ্যে AutoTime চলছে!", threadID);
+  }
+
+  runningGroups.add(threadID);
+  api.sendMessage("✅ বট চালু হয়েছে। এখন থেকে প্রতি ঘন্টা সময়, তারিখ ও দোয়া পাঠানো হবে।", threadID);
+
+  const timeZone = "Asia/Dhaka";
+  const now = moment().tz(timeZone);
+  const nextHour = now.clone().add(1, "hour").startOf("hour");
+  let delay = nextHour.diff(now);
+
+  setTimeout(function tick() {
+    if (!runningGroups.has(threadID)) return;
+
+    sendTime(api, threadID);
+
+    setInterval(() => {
+      if (!runningGroups.has(threadID)) return;
+      sendTime(api, threadID);
+    }, 60 * 60 * 1000);
+
+  }, delay);
 };
 
-module.exports.run = () => {
-    // Main logic is in onLoad
+module.exports.handleEvent = async function ({ api, event }) {
+  const threadID = event.threadID;
+
+  if (!runningGroups.has(threadID)) {
+    runningGroups.add(threadID);
+
+    const timeZone = "Asia/Dhaka";
+    const now = moment().tz(timeZone);
+    const nextHour = now.clone().add(1, "hour").startOf("hour");
+    let delay = nextHour.diff(now);
+
+    setTimeout(function tick() {
+      if (!runningGroups.has(threadID)) return;
+
+      sendTime(api, threadID);
+
+      setInterval(() => {
+        if (!runningGroups.has(threadID)) return;
+        sendTime(api, threadID);
+      }, 60 * 60 * 1000);
+
+    }, delay);
+  }
 };
