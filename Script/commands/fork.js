@@ -10,9 +10,9 @@ module.exports.config = {
 };
 
 module.exports.run = async function({ api, event }) {
-    const message = 
-        "🔗 আমার GitHub Repo:
-হুদাই, সর ফকিন্নি চাইয়া আসোস কেন,আমার কোন repo tipo নাই, জা বাগ শালা 😎😜/MAISHA-CHAT-BOT";
+    const message = `🔗 আমার GitHub Repo:
+হুদাই, সর ফকিন্নি চাইয়া আসোস কেন, আমার কোন repo tipo নাই, জা বাগ শালা 😎😜
+/MAISHA-CHAT-BOT`;
 
     return api.sendMessage(message, event.threadID, event.messageID);
 };
