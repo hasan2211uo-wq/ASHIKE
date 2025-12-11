@@ -10,8 +10,8 @@ Assalamualaikum Everyone!
 ![Box-shaped Image](https://i.imgur.com/RRfliha.jpeg)
 
 <p align="center" style="animation: glow 2s infinite alternate; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-  <span style="font-size: 24px; font-weight: bold;">Mehedi CHAT BOT</span><br>
-  <span> Develop By Mehedi</span>
+  <span style="font-size: 24px; font-weight: bold;">𝐌𝐞𝐡𝐞𝐝𝐢 𝐁𝐨𝐭>/span><br>
+  <span> Develop By 𝐌𝐞𝐡𝐞𝐝𝐢</span>
 </p>
 
 _____
