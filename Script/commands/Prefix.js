@@ -2,7 +2,7 @@ module.exports.config = {
   name: "prefix",
   version: "1.0.0", 
   hasPermssion: 0,
-  credits: "MOHAMMAD AKASH",
+  credits: "Shahadat SAHU",
   description: "Display the bot's prefix and owner info",
   commandCategory: "Information",
   usages: "",
@@ -30,39 +30,34 @@ module.exports.handleEvent = async ({ event, api, Threads }) => {
   let lowerBody = body.toLowerCase();
   if (triggerWords.includes(lowerBody)) {
     return api.sendMessage(
-`🌟━━━━━━━━━━━━━━━━━━━━━━━━━━━━🌟
-      『 🛡️ 𝐏𝐑𝐄𝐌𝐈𝐔𝐌 𝐏𝐑𝐄𝐅𝐈𝐗 𝐌𝐄𝐍𝐔 🛡️ 』
-🌟━━━━━━━━━━━━━━━━━━━━━━━━━━━━🌟
+`🌟━━━━━━━━━━━━━━━━━🌟
+　　　『 𝐏𝐑𝐄𝐅𝐈𝐗 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 』
+🌟━━━━━━━━━━━━━━━━━🌟
+『 𝐁𝐎𝐓 𝐈𝐍𝐅𝐎 』
 
-🦋 𝘼𝙎𝙎𝘼𝙇𝘼𝙈𝙐𝘼𝙇𝘼𝙄𝙆𝙐𝙈 ✨
-𝐇𝐞𝐥𝐥𝐨, 𝐈 𝐚𝐦 𝐌𝐚𝐢𝐬𝐡𝐚 𝐀𝐢 𝐂𝐡𝐚𝐭𝐁𝐨𝐭 🤖💙
+➤ 𝗕𝗼𝘁 𝗽𝗿𝗲𝗳𝗶𝘅 : [ ${prefix} ]
+➤ 𝗕𝗼𝘁 𝗡𝗮𝗺𝗲   : ─꯭─⃝‌‌𝐌𝐞𝐡𝐞𝐝𝐢 𝐂𝐡𝐚𝐭 𝐁𝐨𝐓
+➤ 𝗕𝗼𝘁 𝗔𝗱𝗺𝗶𝗻 : 𝐌𝐄𝐇𝐄𝐃𝐈
 
-『 𝗣𝗥𝗘𝗙𝗜𝗫 𝗦𝗘𝗖𝗧𝗜𝗢𝗡 』
+『 𝐁𝐎𝐗 𝐈𝐍𝐅𝐎 』
 
-🔹 𝙎𝙮𝙨𝙩𝙚𝙢 𝙋𝙧𝙚𝙛𝙞𝙭 : 【 ${prefix} 】  
-🔹 𝙂𝙧𝙤𝙪𝙥 𝙋𝙧𝙚𝙛𝙞𝙭  : 【 ${prefix} 】
+➤ 𝗕𝗼𝘅 𝗣𝗿𝗲𝗳𝗶𝘅 : ${prefix}
+➤ 𝗕𝗼𝘅 𝗡𝗮𝗺𝗲   : ${groupName}
+➤ 𝗕𝗼𝘅 𝗧𝗜𝗗     : ${threadID}
 
-『 𝗕𝗢𝗧 𝗜𝗡𝗙𝗢 』
+『 𝐎𝐖𝐍𝐄𝐑 𝐈𝐍𝐅𝐎 』
 
-🤖 𝘽𝙤𝙩 𝙉𝙖𝙢𝙚 : 𝐌𝐄𝐇𝐄𝐃𝐈 𝐂𝐡𝐚𝐭 𝐁𝐨𝐭   
-⚙️ 𝙋𝙤𝙬𝙚𝙧𝙚𝙙 𝘽𝙮 : 𝐌𝐞𝐡𝐞𝐝𝐢 𝐌𝐚𝐢𝐬𝐡𝐚 𝐀𝐢  
-🚀 𝙎𝙩𝙖𝙩𝙪𝙨 : 𝘼𝙘𝙩𝙞𝙫𝙚 ✔️
+➤ 𝗢𝘄𝗻𝗲𝗿 𝗡𝗮𝗺𝗲 : 𝐌𝐄𝐇𝐄𝐃𝐈 𝐊𝐇𝐀𝐍
+➤ 𝗙𝗮𝗰𝗲𝗯𝗼𝗼𝗸    : https://www.facebook.com/profile.php?id=61583147223219
+➤ 𝗠𝗲𝘀𝘀𝗲𝗻𝗴𝗲𝗿  : m.me/61583147223219
+➤ 𝗪𝗵𝗮𝘁𝘀𝗔𝗽𝗽    : https://𝐍𝐨
 
-『 𝗢𝗪𝗡𝗘𝗥 𝗜𝗡𝗙𝗢 』
-
-👤 𝙊𝙬𝙣𝙚𝙧 :   𝐌𝐄𝐇𝐄𝐃𝐈
-🌐 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 : https://www.facebook.com/profile.php?id=61583147223219
-📞 𝙒𝙝𝙖𝙩𝙨𝘼𝙥𝙥 : wa.me/880000000000  
-
-『 𝗚𝗥𝗢𝗨𝗣 𝗗𝗘𝗧𝗔𝗜𝗟𝗦 』
-
-💬 𝙂𝙧𝙤𝙪𝙥 𝙉𝙖𝙢𝙚 : 【 ${groupName} 】  
-🆔 𝙂𝙧𝙤𝙪𝙥 𝙄𝘿 : 【 ${threadID} 】
-
-🌟━━━━━━━━━━━━━━━━━━━━━━━━━━━━🌟
-          𝙏𝙝𝙖𝙣𝙠 𝙔𝙤𝙪 𝙁𝙤𝙧 𝙐𝙨𝙞𝙣𝙜 💙
-🌟━━━━━━━━━━━━━━━━━━━━━━━━━━━━🌟`,
-threadID );
+🌟━━━━━━━━━━━━━━━━━🌟
+　　　　𝗧𝗵𝗮𝗻𝗸 𝗬𝗼𝘂 𝗙𝗼𝗿 𝗨𝘀𝗶𝗻𝗴!
+🌟━━━━━━━━━━━━━━━━━🌟`,
+      threadID,
+      null
+    );
   }
 };
 
