@@ -47,7 +47,7 @@ module.exports.run = async function({ api, event }) {
       api.sendMessage(
         {
           body: "╭──────•◈•───────╮
- ♡♡.𝐌𝐄𝐇𝐄𝐃𝐈✰𝐊𝐇𝐀𝐍.♡♡
+ ♡𝐌𝐄𝐇𝐄𝐃𝐈♡
 ╰──────•◈•───────╯",
           attachment: fs.createReadStream(path)
         },
