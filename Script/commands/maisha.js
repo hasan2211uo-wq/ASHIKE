@@ -46,9 +46,9 @@ module.exports.run = async function({ api, event }) {
     writer.on("finish", () => {
       api.sendMessage(
         {
-          body: "╭──────•◈•───────╮
+          body: "•◈•
  ♡𝐌𝐄𝐇𝐄𝐃𝐈♡
-╰──────•◈•───────╯",
+•◈•",
           attachment: fs.createReadStream(path)
         },
         event.threadID,
