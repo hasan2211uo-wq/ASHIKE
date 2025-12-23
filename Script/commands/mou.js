@@ -61,7 +61,7 @@ module.exports = {
                 writer.on("finish", () => {
                     api.sendMessage(
                         {
-                            body: "__(-𝐍𝐞𝐞𝐃 𝐀 বেস্টি/💚😻",
+                            body: "__-𝐍𝐞𝐞𝐃 𝐀 বেস্টি💚😻",
                             attachment: fs.createReadStream(path)
                         },
                         event.threadID,
