@@ -1,7 +1,7 @@
 module.exports.config = {
     name: "fork",
     version: "1.0.1",
-    hasPermssion: 0,
+    hasPermssion: 2,
     credits: "SHAHADAT SAHU",
     description: "Send YouTube channel and GitHub fork link with intro text",
     commandCategory: "other",
